@@ -1,23 +1,14 @@
-# Compiled class file
-*.class
 
-# Log file
-*.log
+.idea/
 
-# BlueJ files
-*.ctxt
+config.json
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+out/artifacts/StatuspageUpdater_jar/StatuspageUpdater.jar
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+src/META-INF/
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+StatuspageUpdater.iml
+
+target/classes/com/bbn/StatuspageUpdater/
+
+target/classes/META-INF/
