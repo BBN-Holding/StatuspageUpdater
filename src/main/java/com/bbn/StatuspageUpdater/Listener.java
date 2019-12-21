@@ -3,8 +3,9 @@ package com.bbn.StatuspageUpdater;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.events.Event;
 import net.dv8tion.jda.api.events.ReadyEvent;
-import net.dv8tion.jda.api.events.user.update.UserUpdateOnlineStatusEvent;
+import net.dv8tion.jda.api.events.ReconnectedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import javax.annotation.Nonnull;
@@ -24,6 +25,15 @@ public class Listener extends ListenerAdapter {
 
     @Override
     public void onReady(@Nonnull ReadyEvent event) {
+        run(event);
+    }
+
+    @Override
+    public void onReconnect(@Nonnull ReconnectedEvent event) {
+        run(event);
+    }
+
+    public void run(Event event) {
         new Thread(() -> {
             new Timer().schedule(new TimerTask() {
                 @Override
@@ -41,8 +51,9 @@ public class Listener extends ListenerAdapter {
                             for (Member member : guild.getMembers()) {
                                 if (found) break;
                                 if (member.getUser().getId().equals(id.split("/")[0])) {
-                                    boolean online = member.getOnlineStatus().equals(OnlineStatus.ONLINE);
+                                    boolean online = !member.getOnlineStatus().equals(OnlineStatus.OFFLINE);
                                     sender.setState(id.split("/")[1], online);
+                                    System.out.println(id.split("/")[0]+" is online? "+online);
                                     found = true;
                                 }
                             }
